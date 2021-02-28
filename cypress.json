@@ -1,0 +1,5 @@
+{
+    "baseUrl": "http://localhost:2992/",
+    "testFiles": "**/*.feature",
+    "projectId": "2p4z5w"
+}
