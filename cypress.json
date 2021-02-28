@@ -1,5 +1,6 @@
 {
-    "baseUrl": "http://localhost:2992/",
+    "baseUrl": "https://ratiify.herokuapp.com",
     "testFiles": "**/*.feature",
     "projectId": "2p4z5w"
 }
+ 
