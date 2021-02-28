@@ -10,7 +10,7 @@ var chance = new Chance();
 Given('User goes to Ratify home page', () => {
   cy.visit('/')
 })
-
+ 
 Given('User clicks on Sign up button', () => {
     cy.get('[data-cy=signup]').should('be.visible').click()
 
