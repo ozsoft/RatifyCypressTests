@@ -3,13 +3,14 @@ import { When } from "cypress-cucumber-preprocessor/steps"
 import { Then } from "cypress-cucumber-preprocessor/steps";
 
 Given('User goes to Ratify home page', () => {
+  cy.log(Cypress.config().baseUrl)
   cy.visit('/')
 })
 
 
 When('User enters details to login', () => {
     cy.get('input[name="email"').type('ozgurerisir@gmail.com');
-    cy.get('input[name="password"').type('a');
+    cy.get('input[name="password"').type('gogogo');
     cy.get('button[id="signin"]').click();
 })
 
@@ -39,12 +40,10 @@ Then('User ends up in logged in home page', () => {
 })
 
 Then('User gets incorrect details error', () => {
-  //Email or Password is incorrect
   cy.get('[data-cy=login-error]').should('have.text', 'Email or Password is incorrect')
 }) 
 
 
 Then('User gets insufficient details error', () => {
-  //Email or Password is incorrect
   cy.get('[data-cy=login-error]').should('have.text', 'Please provide an email and password')
 })

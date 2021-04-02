@@ -17,17 +17,21 @@ Given('User clicks on Sign up button', () => {
 })
 
 When('User enters details to Sign up', () => {
-    var name = chance.name();
+    var name = chance.name({length: 8});
     var password = chance.string({ length: 8 })
     var email = chance.email();
-    
+    var lastname = chance.name({ length: 8});
+
     cy.log(name);
     cy.log(email);
 
+    cy.get('[data-cy=signup-username]').type(name);
     cy.get('[data-cy=signup-name]').type(name);
-    cy.get('[data-cy=signup-email]').type(email);
+    cy.get('[data-cy=signup-lastname]').type(lastname);
+    cy.get('[data-cy=signup-email]').type('test' + email);
     cy.get('[data-cy=signup-password]').type(password);
     cy.get('[data-cy=signup-passwordconfirm]').type(password);
+    cy.get('[data-cy=signup-agree]').click();
     cy.get('[data-cy=signup-submit]').click();
 })
 
@@ -47,6 +51,7 @@ When('User enters details to Sign up without name', () => {
     cy.get('[data-cy=signup-email]').type(email);
     cy.get('[data-cy=signup-password]').type(password);
     cy.get('[data-cy=signup-passwordconfirm]').type(password);
+    cy.get('[data-cy=signup-agree]').click();
     cy.get('[data-cy=signup-submit]').click();
 })
 
@@ -54,13 +59,17 @@ When('User enters details to Sign up without email', () => {
     var name = chance.name();
     var password = chance.string({ length: 8 })
     var email = chance.email();
+    var lastname = chance.name({ length: 8});
+
     
     cy.log(name);
     cy.log(email);
 
     cy.get('[data-cy=signup-name]').type(name);
+    cy.get('[data-cy=signup-lastname]').type(lastname);    
     cy.get('[data-cy=signup-password]').type(password);
     cy.get('[data-cy=signup-passwordconfirm]').type(password);
+    cy.get('[data-cy=signup-agree]').click();
     cy.get('[data-cy=signup-submit]').click();
 })
 
@@ -75,20 +84,45 @@ When('User enters details to Sign up without password', () => {
     cy.get('[data-cy=signup-name]').type(name);
     cy.get('[data-cy=signup-email]').type(email);
     cy.get('[data-cy=signup-passwordconfirm]').type(password);
+    cy.get('[data-cy=signup-agree]').click();
     cy.get('[data-cy=signup-submit]').click();
 })
 
 When('User enters details to Sign up without password confirm', () => {
-    var name = chance.name();
+    var name = chance.name({length: 6});
+    var password = chance.string({ length: 8 })
+    var email = chance.email();
+    var lastname = chance.name({ length: 8});
+  
+    cy.log(name);
+    cy.log(email);
+
+    cy.get('[data-cy=signup-username]').type(name);
+    cy.get('[data-cy=signup-lastname]').type(lastname);
+    cy.get('[data-cy=signup-name]').type(name);
+    cy.get('[data-cy=signup-email]').type(email);
+    cy.get('[data-cy=signup-password]').type(password);
+    cy.get('[data-cy=signup-agree]').click();
+    cy.get('[data-cy=signup-submit]').click();
+})
+
+
+When('User enters details to Sign up without accepting terms', () => {
+    var name = chance.name({ length: 8});
+    var lastname = chance.name({ length: 8});
+
     var password = chance.string({ length: 8 })
     var email = chance.email();
     
     cy.log(name);
     cy.log(email);
 
+    cy.get('[data-cy=signup-username]').type(name);
+    cy.get('[data-cy=signup-lastname]').type(lastname);
     cy.get('[data-cy=signup-name]').type(name);
-    cy.get('[data-cy=signup-email]').type(email);
+    cy.get('[data-cy=signup-email]').type('test' + email);
     cy.get('[data-cy=signup-password]').type(password);
+    cy.get('[data-cy=signup-passwordconfirm]').type(password);
     cy.get('[data-cy=signup-submit]').click();
 })
 
@@ -98,6 +132,10 @@ When('User enters details to Sign up without any fields', () => {
 
 Then('User gets please provide your name error', () => {
   cy.get('[data-cy=signup-error]').should('have.text', 'Please populate all fields')
+})
+
+Then('User gets accept terms error', () => {
+  cy.get('[data-cy=signup-error]').should('have.text', 'Terms and conditions need to be accepted')
 })
 
 

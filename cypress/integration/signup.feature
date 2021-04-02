@@ -33,3 +33,10 @@ Feature: Ratify Sign up page
     And User clicks on Sign up button
     When User enters details to Sign up without password confirm
     Then User gets password mismatch error 
+
+
+  Scenario: Sign up to Ratify without accepting terms
+    Given User goes to Ratify home page
+    And User clicks on Sign up button
+    When User enters details to Sign up without accepting terms
+    Then User gets accept terms error 
